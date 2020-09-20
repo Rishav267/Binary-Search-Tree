@@ -1,0 +1,31 @@
+// The API isBadVersion is defined for you.
+// bool isBadVersion(int version);
+
+int firstBadVersion(int n) {
+    int start=0;
+    int end= n;
+    int mid,var;
+    
+    while(start<end)
+    {
+        mid=(start+ (end-start)/2);
+        /*(x+(y-x)/2)
+        ==>(x+y)/2
+        */
+        //mid=(start+end)/2;
+        if(isBadVersion(mid)==true)
+        {
+            var=mid-1; //check m-1 should not exceed the range
+            if(isBadVersion(var)==true)
+                end=mid;
+            else
+                return mid;
+        }
+        else
+        {
+            start=mid+1;
+        }
+    }
+    return end;
+
+    }
