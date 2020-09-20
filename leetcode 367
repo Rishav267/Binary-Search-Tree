@@ -1,0 +1,20 @@
+
+
+bool isPerfectSquare(int num){
+    int start=0;
+    int end=num-1;
+    int mid;
+    if(num==1)
+        return true;
+    while(start<=end)
+    {
+        mid=(start+(end-start)/2);
+        if(pow(mid,2)== num)
+            return true;
+        else if(pow(mid,2)<num)
+            start=mid+1;
+        else
+            end=mid-1;
+    }
+return false;
+}
