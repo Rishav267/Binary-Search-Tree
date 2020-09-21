@@ -1,0 +1,49 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+void leafsearch(struct TreeNode* root,int* arr,int* index)
+{
+    if(root==NULL)
+        return;
+    if(root->left == NULL && root->right == NULL)
+    {
+        
+        *(arr+(*index))=root->val;
+        //printf("%d",root->val);
+        (*index)++;
+        return;
+    }
+    
+    leafsearch(root->left,arr,index);
+    leafsearch(root->right,arr,index);
+   return; 
+}
+
+bool leafSimilar(struct TreeNode* root1, struct TreeNode* root2){
+    
+    int arr1[100]={0};
+    int arr2[100]={0};
+    int index1=0;
+    leafsearch(root1,arr1,&index1);
+    int index2=0;
+    leafsearch(root2,arr2,&index2);
+    int i;
+    if(index1!=index2)
+        return false;
+    
+    for(i=0;i<=index1;i++)
+    {
+        if(arr1[i]!=arr2[i])
+        {
+            return false;
+        }
+    }  
+  return true;
+
+}
