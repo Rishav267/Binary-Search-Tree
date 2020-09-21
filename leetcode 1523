@@ -1,0 +1,43 @@
+/*int fun(int low, int high)
+{
+    int i,count=0;
+    //int mid = (high+low)/2;
+    for(i=low;i<=high;i++)
+    {   
+        if(i%2!=0)
+        {
+            count++;
+        }   
+    }
+    return count;
+}*/
+int countOdds(int low, int high){
+    
+    /*int count=0,count2;
+    int mid,count1;
+     mid=high-((high-low)/2);
+    
+    if(mid%2!=0)
+    {
+        return count++;
+    }
+    return countOdds(low,mid)+countOdds(mid+1,high);*/
+    /*for(i=low;i<=mid;i++)
+    {   
+        if(i%2!=0)
+        {
+            count++;
+        }   
+    }*/
+//return count1+count2;
+    
+    
+    int N = (high-low)/2;
+    
+    if(low%2!=0 || high%2!=0)
+    {
+        N++;
+    }
+   return N;
+    
+}
