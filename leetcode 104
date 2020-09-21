@@ -1,0 +1,59 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+
+int maxDepth(struct TreeNode* root){
+    if(root==NULL)
+    {
+        return 0;
+    }
+    
+   /*int left = maxDepth(root->left);
+    int right=maxDepth(root->right);
+    
+    return left>right? left+1:right+1;*/
+
+    struct TreeNode s[50000]; 
+    int front=-1;
+    int rear=-1;
+    int height=0;
+    
+    front++;
+    rear++;
+    *(s+rear)=*root;
+    
+    while(1)
+    {
+        int nodecount = rear-front+1;
+        if(nodecount==0)
+            return height;
+        
+        height++;
+        
+        while(nodecount>0)
+        {
+            //struct TreeNode* node = *(s+top);
+            *root=*(s+front);
+            front++;
+            if(root->left !=NULL)
+            {
+                rear++;
+                *(s+rear)=*root->left;
+            }
+            if(root->right !=NULL)
+            {
+                rear++;
+                *(s+rear)=*root->right;
+            }
+            nodecount--;
+        }
+    }
+    
+return height;    
+}   
