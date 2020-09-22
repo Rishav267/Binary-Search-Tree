@@ -1,0 +1,69 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+bool sametree(struct TreeNode* s, struct TreeNode* t)
+{
+    if(s==NULL && t==NULL)
+    {
+        return true;
+    }
+    else if(s==NULL || t==NULL)
+    {
+        return false;
+    }
+    
+   /* else if(s==NULL && t!=NULL)
+    {
+        return false;
+    }*/
+    
+    if(s->val != t->val)
+    {
+        return false;
+    }
+    
+    return sametree(s->left,t->left) && sametree(s->right,t->right);
+}
+
+bool findsameroot(struct TreeNode* s, struct TreeNode* t)
+{
+    if(s == NULL)
+    {
+        return false;
+    }
+    
+    if(s->val == t->val)
+    {
+        bool tt=sametree(s,t);
+        if(tt==true)
+            return true;
+    }
+    
+   bool templeft,tempright;
+    
+    templeft=findsameroot(s->left,t);
+    
+    if(templeft)
+      return true;
+    
+    tempright= findsameroot(s->right,t);
+    
+return (templeft)||(tempright);
+    
+}
+
+bool isSubtree(struct TreeNode* s, struct TreeNode* t){
+    if(s==NULL || t==NULL)
+    {
+        return false;
+    }
+    
+    return findsameroot(s,t);
+    
+}
