@@ -1,0 +1,66 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+int getmax(struct TreeNode* root)
+{
+     if(root->right==NULL)
+     {
+         return root->val;
+     }
+    else
+        return getmax(root->right);
+}
+
+struct TreeNode* deleteNode(struct TreeNode* root, int key){
+    
+    struct TreeNode* temp;
+        
+    if(root==NULL)
+    {
+        return 0;
+    }
+    
+    if(key < root->val)
+    {
+        root->left=deleteNode(root->left,key);
+    }
+    
+    else if(key>root->val)
+    {
+        root->right=deleteNode(root->right,key);
+    }
+    else
+    {
+        if(root->left == NULL)
+        {
+            temp = root->right;
+            root=NULL;
+            free(root);
+            root=temp;
+        }
+        else if(root->right==NULL)
+        {
+            temp=root->left;
+            root=NULL;
+            root=temp;
+        }
+        else if(root->left==NULL && root->right==NULL)
+        {
+            root=NULL;
+        }
+        else
+        {
+            root->val=getmax(root->left);
+            root->left=deleteNode(root->left,root->val);
+        }
+    }
+    
+    
+return root;
+}
