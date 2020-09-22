@@ -1,0 +1,128 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+/*int findlen(struct TreeNode* root,int value,struct TreeNode* toproot,int* maxlen)
+{
+    //int maxlen=0;
+    
+    if(root==NULL)
+    {
+        return 0;
+    }
+    
+    if(root->left == NULL && root->right == NULL)
+    {
+        if(root->val==value && toproot!=root)
+        {
+            return 1;
+        }
+        else
+            return 0;
+    }
+    
+    int left= findlen(root->left,root->val,toproot,maxlen);
+     
+    int right=findlen(root->right,root->val,toproot,maxlen);
+    
+    if((*maxlen)<(left+right))
+    {
+        
+        (*maxlen)=left+right;
+        //printf("%d ",maxlen);
+    }
+    
+    if(root->val == value && toproot != root)
+    {
+        if(left>right)
+            return left+1;
+        else
+            return right+1;
+    }
+    
+    else if(toproot==root)
+    {
+        return *maxlen;
+    }
+    
+    else
+    {
+        return 0;
+        
+    }  
+    
+    
+//return maxlen;
+}
+
+int longestUnivaluePath(struct TreeNode* root){
+    
+   int maxlen=0;
+    
+    if(root==NULL)
+    {
+        return 0;
+    }
+    
+    return findlen(root,root->val,root,&maxlen);
+   
+}*/
+
+// /*============second code===========*/
+// second code
+
+//int counter;
+
+/*int max(int x, int y)
+{
+    return x>y?x:y;
+}*/
+
+int findlen(struct TreeNode* root,int* counter)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+    
+    int left=findlen(root->left,counter);
+    int right=findlen(root->right,counter);
+    
+    int x=0;
+    int y=0;
+    
+    if(root->left!=NULL && root->left->val == root->val)
+    {
+        x+=left+1;
+    }
+    if(root->right!=NULL && root->right->val == root->val)
+    {
+        y+=right+1;
+    }
+    
+    //counter=max(counter,x+y);
+    if((*counter)<x+y)
+    {
+        (*counter)=x+y;
+    }
+    
+    if(x>y)
+    {
+        return x;
+    }
+    else
+        return y;
+    //return max(x,y);
+}
+int longestUnivaluePath(struct TreeNode* root){
+    
+    int counter=0;
+    
+    findlen(root,&counter);
+    return counter;
+}
